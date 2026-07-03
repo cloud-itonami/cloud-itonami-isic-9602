@@ -1,0 +1,11 @@
+{:itonami.blueprint/id "cloud-itonami-9602"
+ :itonami.blueprint/name "Hairdressing and other beauty treatment"
+ :itonami.blueprint/isic-rev5 "9602"
+ :itonami.blueprint/domain :services/hairdressing-beauty
+ :itonami.blueprint/license "AGPL-3.0-or-later"
+ :itonami.blueprint/social-impact [:community-access :data-sovereignty :transparency]
+ :itonami.blueprint/governor :personal-service-safety-governor
+ :itonami.blueprint/required-technologies [:robotics :identity :forms :dmn :bpmn :audit-ledger]
+ :itonami.blueprint/optional-technologies []
+ :itonami.blueprint/status :public-oss
+ :itonami.blueprint/robotics true}
