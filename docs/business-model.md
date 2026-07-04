@@ -2,7 +2,7 @@
 
 ## Classification
 
-- Repository: `cloud-itonami-9602`
+- Repository: `cloud-itonami-isic-9602`
 - ISIC Rev.5: `9602`
 - Activity: hairdressing and other beauty treatment -- hair, skin and nail services for customers by licensed practitioners
 - Social impact: community access, data sovereignty, transparent audit

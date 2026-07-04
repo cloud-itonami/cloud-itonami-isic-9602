@@ -1,4 +1,4 @@
-# cloud-itonami-9602
+# cloud-itonami-isic-9602
 
 Open Business Blueprint for **ISIC Rev.5 9602**: Hairdressing and other beauty treatment.
 

@@ -1,6 +1,6 @@
 # Governance
 
-`cloud-itonami-9602` is an OSS open-business blueprint for hairdressing and other beauty treatment -- hair, skin and nail services for customers by licensed practitioners.
+`cloud-itonami-isic-9602` is an OSS open-business blueprint for hairdressing and other beauty treatment -- hair, skin and nail services for customers by licensed practitioners.
 Governance covers both the capability layer and the operator model.
 
 ## Maintainers
