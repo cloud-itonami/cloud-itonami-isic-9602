@@ -30,8 +30,14 @@
 
 ## Trust Controls
 
-- no chemical or skin-piercing treatment is performed without human sign-off (a licensed practitioner)
-- a fabricated allergy/patch-test record forces a hold, not an override
-- every treatment path is auditable
+- no chemical or skin-piercing treatment is performed without human
+  sign-off (a licensed practitioner)
+- a fabricated jurisdiction citation, incomplete client evidence, a
+  stale patch test beyond its pre-treatment validity window, or an
+  unresolved allergy flag -- each forces a hold, not an override
+- a treatment cannot be performed twice on the same booking: a
+  double-completion attempt is held off this actor's own booking facts
+  alone, with no upstream comparison needed
+- every intake, assessment, screening and treatment path is auditable
 - client health data stays outside Git
 - emergency manual override paths remain outside LLM control
