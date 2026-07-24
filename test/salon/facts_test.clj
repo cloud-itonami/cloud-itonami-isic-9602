@@ -20,3 +20,17 @@
     (is (facts/required-evidence-satisfied? "JPN" all))
     (is (not (facts/required-evidence-satisfied? "JPN" (rest all))))
     (is (not (facts/required-evidence-satisfied? "ATL" all)) "no spec-basis -> never satisfied")))
+
+(deftest irl-has-a-spec-basis
+  (is (some? (facts/spec-basis "IRL")))
+  (is (string? (:provenance (facts/spec-basis "IRL")))))
+
+(deftest irl-required-evidence-satisfied-needs-every-item
+  (let [all (facts/evidence-checklist "IRL")]
+    (is (facts/required-evidence-satisfied? "IRL" all))
+    (is (not (facts/required-evidence-satisfied? "IRL" (rest all))))))
+
+(deftest coverage-includes-irl-alongside-all-others
+  (let [report (facts/coverage ["JPN" "USA" "GBR" "DEU" "IRL"])]
+    (is (= 5 (:covered report)))
+    (is (= ["DEU" "GBR" "IRL" "JPN" "USA"] (:covered-jurisdictions report)))))
