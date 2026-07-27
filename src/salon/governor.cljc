@@ -173,7 +173,16 @@
   [{:keys [op subject]} st]
   (when (= op :treatment/perform)
     (let [b (store/booking st subject)]
-      (when (registry/patch-test-window-exceeded? b)
+      (cond
+        ;; The entity EXISTS but the figure it needs is missing or
+        ;; non-numeric, so the limit cannot be evaluated -- which is not
+        ;; the same as being within it. A missing entity is a different
+        ;; violation that another gate owns, so it is excluded here.
+        (and b (not (registry/patch-test-window-exceeded-checkable? b)))
+        [{:rule :patch-test-window-exceeded
+          :detail "上限判定に必要な値が記録されていない -- 限度内と断定できないため進めない"}]
+
+        (registry/patch-test-window-exceeded? b)
         [{:rule :patch-test-window-exceeded
           :detail (str subject " のパッチテストから" (:hours-since-patch-test b)
                       "時間経過し、上限(" registry/max-patch-test-window-hours
