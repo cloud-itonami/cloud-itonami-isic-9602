@@ -63,6 +63,16 @@
   (and (number? hours-since-patch-test)
        (> hours-since-patch-test max-patch-test-window-hours)))
 
+(defn patch-test-window-exceeded-checkable?
+  "Are the figures `patch-test-window-exceeded?` needs actually recorded?
+
+  That predicate answers only `over` / `not over`, and its
+  `(and (number? ...) ...)` guard made an un-recorded figure fall
+  through as `not over`. A client who never had a patch test at all read as being inside the window. Callers must ask this first:
+  un-checkable is not within limits."
+  [{:keys [hours-since-patch-test]}]
+  (boolean (and (number? hours-since-patch-test))))
+
 (defn register-treatment-completion
   "Validate + construct the TREATMENT-COMPLETION registration DRAFT --
   the salon's own legal act of performing a real chemical/skin-
