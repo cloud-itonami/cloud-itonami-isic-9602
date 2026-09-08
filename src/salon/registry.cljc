@@ -29,7 +29,7 @@
   salon would keep, not the act of performing the treatment itself
   (that is `salon.operation`'s `:treatment/perform`, always human-
   gated -- see README `Actuation`)."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (defn- unsigned-certificate
   "Every certificate this actor produces is UNSIGNED -- signature is the
@@ -88,7 +88,7 @@
     (throw (ex-info "treatment-completion: jurisdiction required" {})))
   (when (< sequence 0)
     (throw (ex-info "treatment-completion: sequence must be >= 0" {})))
-  (let [completion-number (str (str/upper-case jurisdiction) "-TRT-" (zero-pad sequence 6))
+  (let [completion-number (str (str/upper jurisdiction) "-TRT-" (zero-pad sequence 6))
         record {"record_id" completion-number
                 "kind" "treatment-completion-draft"
                 "booking_id" booking-id

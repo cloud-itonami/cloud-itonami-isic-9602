@@ -30,7 +30,7 @@
       (salon.governor/allergy-flag-unresolved-violations), never
       reaching a human at all."
   (:require [jp-go-dds.skin]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [salon.store :as store]
             [salon.operation :as op]
             [langgraph.graph :as g]))
