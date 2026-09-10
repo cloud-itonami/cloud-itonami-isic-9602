@@ -146,7 +146,7 @@ own explicit statement.
   sufficiency family applied to a fresh, domain-authentic ground
   truth.
 - (+) The actuation invariant (governor + phase, two layers) is
-  regression-tested by `test/salon/phase_test.clj`'s `treatment-
+  regression-tested by `test/salon/phase_test.kotoba`'s `treatment-
   perform-never-auto-at-any-phase`.
 - (+) `MemStore` ‖ `DatomicStore` parity is proven by `test/salon/
   store_contract_test.clj`, the same `:db-api`-driven swap pattern
