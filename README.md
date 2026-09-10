@@ -81,7 +81,7 @@ autonomous, at any phase, by construction.** Two independent layers
 enforce this (`salon.governor`'s `:actuation/perform-treatment` high-
 stakes gate and `salon.phase`'s phase table, which never puts
 `:treatment/perform` in any phase's `:auto` set) -- see `salon.
-phase`'s docstring and `test/salon/phase_test.clj`'s `treatment-
+phase`'s docstring and `test/salon/phase_test.kotoba`'s `treatment-
 perform-never-auto-at-any-phase`. The actor may draft, check and
 recommend; a human licensed practitioner is always the one who
 actually performs a treatment. Like `6511`/`6621`/`6629`/`6612`/
@@ -163,14 +163,14 @@ stack only -- no bespoke domain capability lib to reference at all.
 
 | File | Role |
 |---|---|
-| `src/salon/store.cljc` | **Store** protocol -- `MemStore` ‖ `DatomicStore` (`langchain.db`) + append-only audit ledger + treatment-completion history. No dynamically-filed sub-record -- the actuation op acts directly on a pre-seeded booking, and the double-completion guard checks a dedicated `:treatment-completed?` boolean rather than a `:status` value |
-| `src/salon/registry.cljc` | Treatment-completion draft records, plus `patch-test-window-exceeded?`/`max-patch-test-window-hours` -- the THIRD check in this fleet's temporal-sufficiency family to enforce a MAXIMUM ceiling, applied to a fresh ground truth (skin allergy-alert patch-test staleness) |
-| `src/salon/facts.cljc` | Per-jurisdiction hairdressing/beauty-treatment catalog with an official spec-basis citation per entry, honest coverage reporting |
-| `src/salon/salonopsllm.cljc` | **SalonOps-LLM Advisor** -- `mock-advisor` ‖ `llm-advisor`; intake/assessment/allergy-screening/treatment-performance proposals |
-| `src/salon/governor.cljc` | **Personal Service Safety Governor** -- 4 HARD checks (spec-basis · evidence-incomplete · patch-test-window-exceeded, pure ground-truth MAXIMUM-ceiling recompute · allergy-flag-unresolved, unconditional evaluation, the THIRTEENTH grounding of this discipline) + already-completed guard + 1 soft (confidence/actuation gate) |
-| `src/salon/phase.cljc` | **Phase 0→3** -- read-only → assisted intake → assisted assess → supervised (treatment performance always human; booking intake is the ONLY auto-eligible op, no direct capital risk) |
-| `src/salon/operation.cljc` | **OperationActor** -- langgraph-clj StateGraph |
-| `src/salon/sim.cljc` | demo driver |
+| `src/salon/store.kotoba` | **Store** protocol -- `MemStore` ‖ `DatomicStore` (`langchain.db`) + append-only audit ledger + treatment-completion history. No dynamically-filed sub-record -- the actuation op acts directly on a pre-seeded booking, and the double-completion guard checks a dedicated `:treatment-completed?` boolean rather than a `:status` value |
+| `src/salon/registry.kotoba` | Treatment-completion draft records, plus `patch-test-window-exceeded?`/`max-patch-test-window-hours` -- the THIRD check in this fleet's temporal-sufficiency family to enforce a MAXIMUM ceiling, applied to a fresh ground truth (skin allergy-alert patch-test staleness) |
+| `src/salon/facts.kotoba` | Per-jurisdiction hairdressing/beauty-treatment catalog with an official spec-basis citation per entry, honest coverage reporting |
+| `src/salon/salonopsllm.kotoba` | **SalonOps-LLM Advisor** -- `mock-advisor` ‖ `llm-advisor`; intake/assessment/allergy-screening/treatment-performance proposals |
+| `src/salon/governor.kotoba` | **Personal Service Safety Governor** -- 4 HARD checks (spec-basis · evidence-incomplete · patch-test-window-exceeded, pure ground-truth MAXIMUM-ceiling recompute · allergy-flag-unresolved, unconditional evaluation, the THIRTEENTH grounding of this discipline) + already-completed guard + 1 soft (confidence/actuation gate) |
+| `src/salon/phase.kotoba` | **Phase 0→3** -- read-only → assisted intake → assisted assess → supervised (treatment performance always human; booking intake is the ONLY auto-eligible op, no direct capital risk) |
+| `src/salon/operation.kotoba` | **OperationActor** -- langgraph-clj StateGraph |
+| `src/salon/sim.kotoba` | demo driver |
 | `test/salon/*_test.clj` | governor contract · phase invariants · store parity · registry conformance · facts coverage |
 
 ## Business-process coverage (honest)
