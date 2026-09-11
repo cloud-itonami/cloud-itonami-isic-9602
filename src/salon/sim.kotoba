@@ -1,5 +1,5 @@
 (ns salon.sim
-  "Demo driver -- `clojure -M:dev:run`. Walks a clean booking through
+  "Demo driver -- `kbb -M:dev:run`. Walks a clean booking through
   intake -> jurisdiction assessment -> allergy screening -> treatment-
   performance proposal (always escalates) -> human approval -> commit,
   then shows four HARD holds (a jurisdiction with no spec-basis, a
