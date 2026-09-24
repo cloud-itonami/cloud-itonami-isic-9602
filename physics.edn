@@ -1,0 +1,32 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:dev:physics` runs it.
+;;
+;; README "Robotics premise": a facility-hygiene monitoring robot supports
+;; sanitation checks in a hairdressing / beauty salon (ISIC 9602), gated by the
+;; Personal Service Safety Governor. Its physical work here is the hygiene
+;; cycle between clients: heating rolled towels in the hot-towel cabinet, and draining the pedicure foot-spa basin before it is
+;; disinfected.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isic-9602"
+ :cases
+ [{:id :hot-towel-cabinet
+   :kind :thermal
+   :procedure "robot loads rolled damp towels into the hot-towel cabinet; the cabinet air heats each roll from outside until its core is hot enough to be hygienic (the 30 mm roll is modelled as a 15 mm half-slab with a symmetric core)"
+   :params {:thickness-m 0.015 :conductivity-w-mk 0.10 :density-kg-m3 400.0 :specific-heat-j-kgk 2500.0
+            :t0-c 22.0 :h-front-w-m2k 15.0 :h-back-w-m2k 0.0
+            :threshold-c 65.0 :duration-s 7200.0 :nodes 11}
+   :sweep {:param :t-hot-c :values [70.0 75.0 80.0 85.0 90.0]}
+   :quantity :time-to-threshold-s
+   :limit {:max 2700.0 :basis "estimate: towel core at 65 C within 45 minutes of loading, before the first client; damp-cotton properties, cabinet air heat transfer coefficient and the 65 C hygiene target are estimates"}
+   :boundary {:lo 66.0 :hi 120.0}}
+  {:id :foot-spa-drain
+   :kind :tank-drain
+   :procedure "after a pedicure the robot opens the foot-spa basin drain and the water empties by gravity before the basin is disinfected"
+   :params {:tank-area-m2 0.20 :h0-m 0.15 :h-target-m 0.005 :cd 0.62 :dt-s 0.1}
+   :sweep {:param :orifice-area-m2 :values [1.13e-4 2.01e-4 3.14e-4 4.91e-4 7.07e-4 1.257e-3]}
+   :quantity :time-to-target-s
+   :limit {:max 60.0 :basis "estimate: basin emptied within a minute so the between-client disinfection contact time fits the appointment gap; the sweep is 12/16/20/25/30/40 mm drain bores"}
+   :boundary {:lo 5.0e-5 :hi 2.0e-3}}]}
